@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="npstat",
-    version="0.1.0",
+    version="0.1.1",
     author="OsAfzal",
     description="Statistical hypothesis testing package",
     packages=find_packages(),

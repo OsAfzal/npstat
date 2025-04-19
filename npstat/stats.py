@@ -6,7 +6,8 @@ def mann_whitney_test(df, categorical_vars, numerical_variable):
     
     if isinstance(numerical_variable, str):
         numerical_variable = [numerical_variable]
-
+    if isinstance(categorical_vars, str):
+        categorical_vars = [categorical_vars]
 
     for cat_var in categorical_vars:
         for variable in numerical_variable:
@@ -45,7 +46,8 @@ def kruskal_wallis_test(df, categorical_vars, numerical_variable):
     results = {}
     if isinstance(numerical_variable, str):
         numerical_variable = [numerical_variable]
-
+    if isinstance(categorical_vars, str):
+        categorical_vars = [categorical_vars]
 
     for cat_var in categorical_vars:
         categories = df[cat_var].unique()
