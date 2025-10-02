@@ -9,9 +9,11 @@ setup(
     install_requires=[
         "pandas",
         "scipy",
-        "scikit-learn"
+        "scikit-learn",
+        "matplotlib"
     ],
     python_requires=">=3.6",
 
 )
+
 
