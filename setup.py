@@ -9,7 +9,9 @@ setup(
     install_requires=[
         "pandas",
         "scipy",
+        "scikit-learn"
     ],
     python_requires=">=3.6",
 
 )
+
