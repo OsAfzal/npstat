@@ -152,7 +152,7 @@ def chi_square(data, cls_cats, test_cats):
     return styled_results_df
 
 
-def FeaturesPlot(rf_model, X_train, X_test, y_test):
+def FeaturesPlot(model, X_train, X_test, y_test):
     """
     Plots the feature importances and ROC curve for a trained RandomForest model.
 
@@ -164,12 +164,12 @@ def FeaturesPlot(rf_model, X_train, X_test, y_test):
     """
 
     # Feature importances
-    importances = rf_model.feature_importances_
+    importances = model.feature_importances_
     feature_names = X_train.columns
     indices = importances.argsort()[::-1]
 
     # ROC and AUC
-    y_proba = rf_model.predict_proba(X_test)[:, 1]
+    y_proba = model.predict_proba(X_test)[:, 1]
     fpr, tpr, thresholds = roc_curve(y_test, y_proba)
     auc_score = roc_auc_score(y_test, y_proba)
 
@@ -193,3 +193,4 @@ def FeaturesPlot(rf_model, X_train, X_test, y_test):
 
     plt.tight_layout()
     plt.show()
+
