@@ -1,5 +1,9 @@
 import pandas as pd
 import scipy
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.metrics import roc_curve, roc_auc_score
+
 
 def mann_whitney_test(df, categorical_vars, numerical_variable):
     results = {}
@@ -146,3 +150,46 @@ def chi_square(data, cls_cats, test_cats):
 
 
     return styled_results_df
+
+
+def FeaturesPlot(rf_model, X_train, X_test, y_test):
+    """
+    Plots the feature importances and ROC curve for a trained RandomForest model.
+
+    Parameters:
+    - rf_model: Trained RandomForestClassifier model
+    - X_train: Training feature set (used for feature names)
+    - X_test: Test feature set
+    - y_test: True labels for the test set
+    """
+
+    # Feature importances
+    importances = rf_model.feature_importances_
+    feature_names = X_train.columns
+    indices = importances.argsort()[::-1]
+
+    # ROC and AUC
+    y_proba = rf_model.predict_proba(X_test)[:, 1]
+    fpr, tpr, thresholds = roc_curve(y_test, y_proba)
+    auc_score = roc_auc_score(y_test, y_proba)
+
+    # Plotting
+    fig, ax = plt.subplots(1, 2, figsize=(13, 5))
+
+    # Feature importances bar plot
+    sns.barplot(x=importances[indices], y=[feature_names[i] for i in indices], ax=ax[0])
+    ax[0].set_title("Feature Importances")
+    ax[0].set_xlabel("Importance")
+    ax[0].set_ylabel("Feature")
+
+    # ROC curve
+    ax[1].plot(fpr, tpr, label=f"AUC = {auc_score:.2f}")
+    ax[1].plot([0, 1], [0, 1], linestyle='--', color='gray')
+    ax[1].set_xlabel("False Positive Rate")
+    ax[1].set_ylabel("True Positive Rate")
+    ax[1].set_title("ROC Curve")
+    ax[1].legend()
+    ax[1].grid(True)
+
+    plt.tight_layout()
+    plt.show()
