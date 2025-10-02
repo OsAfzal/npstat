@@ -2,7 +2,7 @@ import pandas as pd
 import scipy
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.metrics import roc_curve, roc_auc_score, , auc
+from sklearn.metrics import roc_curve, roc_auc_score, auc
 from sklearn.preprocessing import label_binarize
 import numpy as np
 
@@ -222,5 +222,6 @@ def FeaturesPlot(model, X_train, X_test, y_test):
     plt.show()
 
     plt.show()
+
 
 
